@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>TickMe - Todo List</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <button class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="app-container">
+      <div class="sidebar">
+        <div class="logo">
+          <i class="fas fa-check-circle"></i>
+          <h1>TickMe</h1>
+        </div>
+
+        <div class="menu">
+          <button class="menu-item active" data-filter="all">
+            <i class="fas fa-tasks"></i>
+            <span>All Tasks</span>
+          </button>
+          <button class="menu-item" data-filter="low">
+            <i class="fas fa-battery-empty"></i>
+            <span>Low Priority</span>
+          </button>
+          <button class="menu-item" data-filter="medium">
+            <i class="fas fa-battery-half"></i>
+            <span>Medium Priority</span>
+          </button>
+          <button class="menu-item" data-filter="high">
+            <i class="fas fa-battery-full"></i>
+            <span>High Priority</span>
+          </button>
+          <button class="menu-item" data-filter="completed">
+            <i class="fas fa-check"></i>
+            <span>Completed</span>
+          </button>
+        </div>
+
+        <div class="categories">
+          <h3>Categories</h3>
+          <div class="category-list">
+            <button class="category-item" data-category="Work">
+              <span class="color-dot" style="background: #ff6b6b"></span>
+              <span>Work</span>
+            </button>
+            <button class="category-item" data-category="Personal">
+              <span class="color-dot" style="background: #4ecdc4"></span>
+              <span>Personal</span>
+            </button>
+            <button class="category-item" data-category="Shopping">
+              <span class="color-dot" style="background: #ffd93d"></span>
+              <span>Shopping</span>
+            </button>
+            <button class="category-item" data-category="Health">
+              <span class="color-dot" style="background: #95e1d3"></span>
+              <span>Health</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="top-bar">
+          <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search tasks..." />
+          </div>
+          <div class="user-menu">
+            <button class="theme-toggle">
+              <i class="fas fa-moon"></i>
+            </button>
+            <div class="auth-controls">
+              <button class="btn primary" id="authEntryBtn">Get Started</button>
+              <span id="usernameDisplay" style="display: none"></span>
+              <button
+                class="btn secondary"
+                id="logoutBtn"
+                style="display: none">
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-header">
+          <div class="header-left">
+            <h2>My Tasks</h2>
+            <span class="task-count" id="taskCounter">0 tasks remaining</span>
+          </div>
+          <div class="header-right">
+            <button class="filter-btn">
+              <i class="fas fa-filter"></i>
+              <span>Filter</span>
+            </button>
+            <button class="add-task-btn">
+              <i class="fas fa-plus"></i>
+              <span>Add Task</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="task-input-container">
+          <div class="task-input">
+            <input
+              type="text"
+              id="todoInput"
+              placeholder="What needs to be done?" />
+            <div class="task-options">
+              <input type="date" id="dueDate" />
+              <select id="priority">
+                <option value="low">Low Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="high">High Priority</option>
+              </select>
+              <select id="category">
+                <option value="">No Category</option>
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Health">Health</option>
+              </select>
+              <button id="addBtn" class="add-btn">
+                <i class="fas fa-plus"></i>
+                <span>Add</span>
+              </button>
+              <button id="completeAndAddBtn" class="add-btn">
+                <i class="fas fa-check-double"></i>
+                <span>Complete & Add</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tasks-container">
+          <div class="tasks-header">
+            <div class="tasks-tabs">
+              <button class="tab active" data-filter="all">All</button>
+              <button class="tab" data-filter="active">Active</button>
+              <button class="tab" data-filter="completed">Completed</button>
+            </div>
+            <button class="clear-btn" id="clearCompleted">
+              <i class="fas fa-trash-alt"></i>
+              <span>Clear Completed</span>
+            </button>
+          </div>
+
+          <ul id="todoList" class="todo-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+
+  <!-- Combined Auth Modal -->
+  <div id="authModal" class="modal" style="display: none">
+    <div class="modal-content">
+      <span class="close-button" data-modal="authModal">&times;</span>
+      <h2 id="authModalTitle">Sign Up</h2>
+      <form id="authForm">
+        <div class="form-group">
+          <label for="authUsername">Username:</label>
+          <input type="text" id="authUsername" required />
+        </div>
+        <button type="submit" class="btn primary" id="authSubmitBtn">
+          Login
+        </button>
+        <p class="auth-switch-text">
+          <span id="toggleAuthMode">New User? Sign Up</span>
+        </p>
+      </form>
+    </div>
+  </div>
+</html>
