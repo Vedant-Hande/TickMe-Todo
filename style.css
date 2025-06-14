@@ -981,7 +981,7 @@ body {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: 500;
+  font-weight: 500; 
   display: flex;
   align-items: center;
   gap: 0.5rem;
