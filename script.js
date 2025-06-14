@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskInputContainer = document.querySelector(".task-input-container");
   const completeAndAddBtn = document.getElementById("completeAndAddBtn");
 
+  // Mobile Menu Elements
+  const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+  const sidebar = document.querySelector(".sidebar");
+
   // New Auth Elements (Top Bar)
   const authEntryBtn = document.getElementById("authEntryBtn");
   const usernameDisplay = document.getElementById("usernameDisplay");
@@ -321,6 +325,23 @@ document.addEventListener("DOMContentLoaded", () => {
   clearCompletedBtn.addEventListener("click", clearCompleted);
   themeToggle.addEventListener("click", toggleDarkMode);
   completeAndAddBtn.addEventListener("click", () => addTodo(true));
+
+  // Mobile Menu Event Listener
+  mobileMenuBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("show");
+  });
+
+  // Close sidebar when clicking outside on mobile
+  window.addEventListener("click", (event) => {
+    if (
+      window.innerWidth <= 1024 &&
+      !sidebar.contains(event.target) &&
+      !mobileMenuBtn.contains(event.target) &&
+      sidebar.classList.contains("show")
+    ) {
+      sidebar.classList.remove("show");
+    }
+  });
 
   // Auth Event Listeners
   authEntryBtn.addEventListener("click", () => {
